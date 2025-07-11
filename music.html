@@ -1,249 +1,160 @@
 <!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Music</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0e0e0e;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
       color: white;
+      overflow-x: hidden;
     }
     header {
-      text-align: center;
-      padding: 30px 10px 10px;
-      font-size: 2em;
-      text-shadow: 0 0 10px #0ff;
-    }
-    .music-player {
-      max-width: 700px;
-      margin: auto;
       padding: 20px;
-      background: #1c1c1c;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
-    .song {
+    header h1 {
+      font-size: 2em;
+      color: #fff;
+      text-shadow: 0 0 10px #00fff7;
+    }
+    main {
+      padding: 20px;
+    }
+    .music-item {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
       margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.3);
+    }
+    .music-item h2 {
+      margin-bottom: 10px;
     }
     audio {
       width: 100%;
+      margin: 10px 0;
     }
     .lyrics {
       max-height: 200px;
       overflow-y: auto;
+      background: rgba(255,255,255,0.05);
       padding: 10px;
-      margin-top: 10px;
-      background: #111;
-      border-radius: 8px;
+      border-radius: 10px;
+      font-size: 0.95em;
+      white-space: pre-line;
     }
-    h3 {
-      margin-top: 0;
+    .request-form {
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+    }
+    .request-form input, .request-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      background: #111;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 10px;
+    }
+    .request-form button {
+      padding: 10px 20px;
+      background: #00fff7;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <header>Music</header>  <div class="music-player">
-    <div class="song">
-      <h3>1. Nanti Kita Seperti Ini - Batas Senja</h3>
+  <header>
+    <h1>Music</h1>
+  </header>
+  <main>
+    <div class="music-item">
+      <h2>1. Nanti Kita Seperti Ini - Batas Senja</h2>
       <audio controls src="sound1.mp3"></audio>
       <div class="lyrics">
-        Ini gambaran kita suatu hari nanti<br>
-        Set'lah sekian lama kita jalani<br>
-        Lewati masa-masa yang berarti<br>
-        Kini ku sudah yakin pada satu hati<br>
-        Yang kurasa tepat untuk temani<br>
-        Sekarang hingga aku tua nanti<br>
-        Ingin punya rumah 'tuk tempat bermesra<br>
-        Kau dipanggil ibu, sementara aku ayah<br>
-        Bertukar cerita di ruang keluarga<br>
-        Bercengk'rama dan menimang buah hati kita<br>
-        Sederhana<br>
-        Bahagia ini lengkap sudah<br>
-        Sama-sama<br>
-        Hingga nanti kita tutup mata<br>
-        Ha-ah-ah-ah<br>
-        Ah-ah-ah-ah<br>
-        Ha-ah-ah-ah<br>
-        Ingin punya rumah 'tuk tempat bermesra<br>
-        Kau dipanggil ibu, sementara aku ayah<br>
-        Bertukar cerita hingga lelap mata<br>
-        Lalu datang pagi, kau memasak, ku bekerja<br>
-        Sederhana<br>
-        Bahagia ini lengkap sudah<br>
-        Sama-sama<br>
-        Hingga nanti ajal kita tiba<br>
-        Semoga saja<br>
-        Niat baik 'kan terwujud seg'ra<br>
-        Asal kita<br>
-        Percaya Dia Maha Segalanya<br>
-        Jangan dulu lelah, yakin semua indah<br>
-        Pejamkanlah mata, pada-Nya kita berserah
-      </div>
-    </div><div class="song">
-  <h3>2. Somebody Pleasure</h3>
+Ini gambaran kita suatu hari nanti
+Set'lah sekian lama kita jalani
+Lewati masa-masa yang berarti
+Kini ku sudah yakin pada satu hati
+Yang kurasa tepat untuk temani
+Sekarang hingga aku tua nantiIngin punya rumah 'tuk tempat bermesra Kau dipanggil ibu, sementara aku ayah Bertukar cerita di ruang keluarga Bercengk'rama dan menimang buah hati kita
+
+Sederhana Bahagia ini lengkap sudah Sama-sama Hingga nanti kita tutup mata
+
+Ingin punya rumah 'tuk tempat bermesra Kau dipanggil ibu, sementara aku ayah Bertukar cerita hingga lelap mata Lalu datang pagi, kau memasak, ku bekerja
+
+Sederhana Bahagia ini lengkap sudah Sama-sama Hingga nanti ajal kita tiba
+
+Semoga saja Niat baik 'kan terwujud seg'ra Asal kita Percaya Dia Maha Segalanya Jangan dulu lelah, yakin semua indah Pejamkanlah mata, pada-Nya kita berserah </div> </div>
+
+<div class="music-item">
+  <h2>2. Somebody Pleasure</h2>
   <audio controls src="sound2.mp3"></audio>
   <div class="lyrics">
-    I've been too busy, ignoring, and hiding<br>
-    About what my heart actually say<br>
-    Stay awake while I'm drowning on my thoughts<br>
-    Sometimes a happiness is just a happiness<br>
-    I've never been enjoyin' my serenity<br>
-    Even if I've got a lot of company<br>
-    That makes me happy<br>
-    Soul try to figure it out<br>
-    From where I've been escapin'<br>
-    Running to end all the sin<br>
-    Get away from the pressure<br>
-    Wondering to get a love that is so pure<br>
-    Gotta have to always make sure<br>
-    That I'm not just somebody's pleasure<br>
-    I always pretending and lying<br>
-    I got used to feeling empty<br>
-    'Cause all I got is unhappy<br>
-    Happiness, can't I get happiness?<br>
-    I've never been enjoyin' my serenity<br>
-    Even if I've got a lot of company<br>
-    That makes me happy<br>
-    Soul try to figure it out<br>
-    From where I've been escapin'<br>
-    Running to end all the sin<br>
-    Get away from the pressure<br>
-    Wondering to get a love that is so pure<br>
-    Gotta have to always make sure<br>
-    That I'm not just somebody's pleasure<br>
-    It was in a blink of an eye<br>
-    Find a way how to say goodbye<br>
-    I've got to take me away<br>
-    From all sadness<br>
-    Stitch all my wounds, confess all the sins<br>
-    And took all my insecure<br>
-    When will I got the love that is so pure?<br>
-    Gotta have to always make sure<br>
-    That I'm not just somebody's pleasure<br>
-    Gotta have<br>
-    Gotta have to always make sure<br>
-    That I'm not just somebody's pleasure
-  </div>
-</div>
 
-<div class="song">
-  <h3>3. Calon Mantu</h3>
+I've been too busy, ignoring, and hiding About what my heart actually say Stay awake while I'm drowning on my thoughts Sometimes a happiness is just a happiness
+
+I've never been enjoyin' my serenity Even if I've got a lot of company That makes me happy Soul try to figure it out From where I've been escapin' Running to end all the sin Get away from the pressure Wondering to get a love that is so pure Gotta have to always make sure That I'm not just somebody's pleasure
+
+I always pretending and lying I got used to feeling empty 'Cause all I got is unhappy Happiness, can't I get happiness?
+
+It was in a blink of an eye Find a way how to say goodbye I've got to take me away From all sadness Stitch all my wounds, confess all the sins And took all my insecure When will I got the love that is so pure? Gotta have to always make sure That I'm not just somebody's pleasure </div> </div>
+
+<div class="music-item">
+  <h2>3. Calon Mantu</h2>
   <audio controls src="sound3.mp3"></audio>
   <div class="lyrics">
-    Suara lembutmu<br>
-    Mengisyaratkan cinta<br>
-    Tatap matamu<br>
-    Buatku menggila<br>
-    Kecup manismu<br>
-    Wanna be all over you<br>
-    Terus mendekat<br>
-    Biar ku dekap<br>
-    Tick Tock<br>
-    Hatiku kau zip lock<br>
-    Makin lama It’s stuck<br>
-    Ku percaya ini with my luck<br>
-    It’s just me and you against the world<br>
-    Forever im yours and you’ll be mine<br>
-    But do you feel it too?<br>
-    Like the way I do?<br>
-    Aku calon mantu terbaik mamamu<br>
-    Walaupun hatimu<br>
-    Sekeras batu<br>
-    Still got you on mind<br>
-    No matter what you do<br>
-    But do you feel it too?<br>
-    Like the way I do?<br>
-    Aku calon mantu terbaik mamamu<br>
-    Walaupun hatimu<br>
-    Sekeras batu<br>
-    Still got you on mind<br>
-    No matter what you do<br>
-    Baby aku rindu resah selalu ingin bertemu<br>
-    Hold you in my arms<br>
-    Baby tell me do you feel it too?<br>
-    Main main<br>
-    Ku cuma mind mine,<br>
-    Stay for the night maybe it will be alright<br>
-    Tick Tock<br>
-    Hatiku kau zip lock<br>
-    Makin lama It’s stuck<br>
-    Ku percaya ini with my luck<br>
-    It’s just me and you against the world<br>
-    Forever im yours and you’ll be mine<br>
-    But do you feel it too?<br>
-    Like the way I do?<br>
-    Aku calon mantu terbaik mamamu<br>
-    Walau hatimu<br>
-    Sekeras batu<br>
-    Still got you on mind<br>
-    I still got you in my mind<br>
-    Baby do you feel it too?
-  </div>
-</div>
 
-<div class="song">
-  <h3>4. 123456 - Budi Doremi</h3>
+Suara lembutmu Mengisyaratkan cinta Tatap matamu Buatku menggila Kecup manismu Wanna be all over you Terus mendekat Biar ku dekap
+
+Tick Tock Hatiku kau zip lock Makin lama It’s stuck Ku percaya ini with my luck It’s just me and you against the world Forever im yours and you’ll be mine But do you feel it too? Like the way I do? Aku calon mantu terbaik mamamu Walaupun hatimu Sekeras batu Still got you on mind No matter what you do
+
+Baby aku rindu resah selalu ingin bertemu Hold you in my arms Baby tell me do you feel it too? Main main Ku cuma mind mine, Stay for the night maybe it will be alright
+
+Tick Tock Hatiku kau zip lock Makin lama It’s stuck Ku percaya ini with my luck It’s just me and you against the world Forever im yours and youll be mine But do you feel it too? Like the way I do? Aku calon mantu terbaik mamamu Walau hatimu Sekeras batu Still got you on mind I still got you in my mind Baby do you feel it too? </div> </div>
+
+<div class="music-item">
+  <h2>4. 123456 - Budi Doremi</h2>
   <audio controls src="sound4.mp3"></audio>
   <div class="lyrics">
-    Yo, yo, what′s up? Yo<br>
-    Budi in the house, yo<br>
-    Yo, yo, yo<br>
-    Yo, ya, yo, yo<br>
-    Ada sebuah cerita<br>
-    Tentang aku dan dia<br>
-    Jumpa pertamaku dengannya<br>
-    Di satu sore yang cerah<br>
-    Singkat kata, singkat cerita<br>
-    Ku berjalan dengannya<br>
-    Namun, apa yang aku rasa?<br>
-    Mungkinkah ini cinta?<br>
-    Dan aku, kubayangkan dirimu<br>
-    Mulai ada rindu<br>
-    Duniaku terhenti kar'na kamu<br>
-    Mungkin bisa jadi milikku<br>
-    S′moga lagu cinta ini<br>
-    Bersarang tepat di hatimu<br>
-    Satu kali ku bertemu<br>
-    Dua-lam sudah rasaku<br>
-    Tiga kata yang kutahu<br>
-    "Aku cinta padamu"<br>
-    Empat malam ku menunggu<br>
-    Jawaban cinta darimu<br>
-    Lima tanda yang kauberi<br>
-    Enam-paknya kau cinta padaku<br>
-    Na-na-na-na-na-na-na<br>
-    Na-na-na-na, na-na-na-na-na<br>
-    Na-na-na-na, na-na-na-na-na-na-na<br>
-    Dan aku, kubayangkan dirimu<br>
-    Mulai ada rindu<br>
-    Duniaku terhenti kar'na kamu<br>
-    Mungkin bisa jadi milikku<br>
-    S'moga lagu cinta ini<br>
-    Bersarang tepat di hatimu<br>
-    Satu, dua, tiga, empat, lima, dan enam<br>
-    Rasa kutanam dan cinta mulai berkembang<br>
-    Begitulah proses tangkap-menangkap hati darimu<br>
-    Ya, namanya juga orang lagi usaha, mau gimana lagi?<br>
-    Kau di sana, ku di sini<br>
-    Kau tersipu, artinya mau<br>
-    Wo-ho-oh, eh-yeah-yeah-yeah<br>
-    Na-na-na-na-na-na, ta-ra-ta-ra<br>
-    Ta-ra-ra-ra-ra, ta-ta, oh<br>
-    Satu kali ku bertemu<br>
-    Dua-lam sudah rasaku<br>
-    Tiga kata yang kutahu<br>
-    "Aku cinta padamu"<br>
-    Empat malam ku menunggu<br>
-    Jawaban cinta darimu<br>
-    Lima tanda yang kauberi<br>
-    Enam-paknya kau cinta pa-<br>
-    Enam-paknya kau cinta padaku<br>
-    Terima kasih
-  </div>
+
+Yo, yo, what′s up? Yo Budi in the house, yo Yo, yo, yo Yo, ya, yo, yo
+
+Ada sebuah cerita Tentang aku dan dia Jumpa pertamaku dengannya Di satu sore yang cerah Singkat kata, singkat cerita Ku berjalan dengannya Namun, apa yang aku rasa? Mungkinkah ini cinta?
+
+Dan aku, kubayangkan dirimu Mulai ada rindu Duniaku terhenti kar'na kamu Mungkin bisa jadi milikku S′moga lagu cinta ini Bersarang tepat di hatimu
+
+Satu kali ku bertemu Dua-lam sudah rasaku Tiga kata yang kutahu "Aku cinta padamu" Empat malam ku menunggu Jawaban cinta darimu Lima tanda yang kauberi Enam-paknya kau cinta padaku
+
+Na-na-na-na-na-na-na Na-na-na-na, na-na-na-na-na Na-na-na-na, na-na-na-na-na-na-na
+
+Dan aku, kubayangkan dirimu Mulai ada rindu Duniaku terhenti kar'na kamu Mungkin bisa jadi milikku S'moga lagu cinta ini Bersarang tepat di hatimu
+
+Satu, dua, tiga, empat, lima, dan enam Rasa kutanam dan cinta mulai berkembang Begitulah proses tangkap-menangkap hati darimu Ya, namanya juga orang lagi usaha, mau gimana lagi? Kau di sana, ku di sini Kau tersipu, artinya mau
+
+Wo-ho-oh, eh-yeah-yeah-yeah Na-na-na-na-na-na, ta-ra-ta-ra Ta-ra-ra-ra-ra, ta-ta, oh
+
+Satu kali ku bertemu Dua-lam sudah rasaku Tiga kata yang kutahu "Aku cinta padamu" Empat malam ku menunggu Jawaban cinta darimu Lima tanda yang kauberi Enam-paknya kau cinta padaku </div> </div>
+
+<div class="request-form">
+  <h3>Request Lagu</h3>
+  <input type="text" placeholder="Judul Lagu" />
+  <textarea placeholder="Pesan Tambahan"></textarea>
+  <button>Kirim</button>
 </div>
 
-  </div>
+  </main>
 </body>
 </html>
