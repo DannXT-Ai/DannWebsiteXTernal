@@ -7,7 +7,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #000;
+      background: linear-gradient(135deg, #000000, #1c1c1c);
       color: #fff;
       text-align: center;
       padding: 40px 20px;
@@ -16,36 +16,38 @@
     h1 {
       color: #fff;
       margin-bottom: 30px;
-      font-size: 2.5em;
+      font-size: 2.8em;
       letter-spacing: 2px;
       text-transform: uppercase;
-      border-bottom: 2px solid #555;
-      display: inline-block;
-      padding-bottom: 10px;
-      animation: glowText 4s ease-in-out infinite;
+      background: linear-gradient(90deg, #ffffff, #00ffff, #ffffff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 5s linear infinite;
     }
-    @keyframes glowText {
-      0% { text-shadow: 0 0 10px #fff; }
-      50% { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
-      100% { text-shadow: 0 0 10px #fff; }
+    @keyframes shine {
+      0% { background-position: 0% }
+      100% { background-position: 200% }
     }
     .player {
-      background: #111;
+      background: rgba(255, 255, 255, 0.05);
       margin: 25px auto;
       padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
       max-width: 600px;
-      transition: transform 0.3s;
+      transition: all 0.3s ease-in-out;
     }
     .player:hover {
-      transform: translateY(-5px);
+      transform: scale(1.03);
+      box-shadow: 0 0 25px rgba(0,255,255,0.2);
     }
     .player p {
       margin-bottom: 12px;
       font-weight: bold;
       font-size: 1.2em;
-      color: #ddd;
+      color: #eee;
     }
     input[type=range] {
       width: 80%;
@@ -56,7 +58,7 @@
     }
     footer {
       margin-top: 50px;
-      color: #666;
+      color: #888;
       font-size: 0.9em;
     }
     canvas#particles {
@@ -108,7 +110,7 @@
     canvas.height = window.innerHeight;
 
     const particles = [];
-    const colors = ["#ffffff", "#aaaaaa", "#dddddd"];
+    const colors = ["#ffffff", "#00ffff", "#999999"];
 
     for (let i = 0; i < 100; i++) {
       particles.push({
