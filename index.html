@@ -4,30 +4,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playlist Musik Dann</title>
   <style>
-    body {
+    body, html {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #000000, #1c1c1c);
       color: #fff;
       text-align: center;
-      padding: 40px 20px;
       overflow: hidden;
     }
-    h1 {
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    #loader span {
+      font-size: 1.5em;
       color: #fff;
-      margin-bottom: 30px;
+      animation: blink 1.2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    #intro {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease;
+    }
+    #intro.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    #intro h2 {
+      color: #fff;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    #intro p {
+      color: #aaa;
+      font-size: 1em;
+    }
+    h1 {
+      color: #222;
+      margin: 90px 0 30px;
       font-size: 2.8em;
       letter-spacing: 2px;
       text-transform: uppercase;
-      background: linear-gradient(90deg, #ffffff, #00ffff, #ffffff);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shine 5s linear infinite;
-    }
-    @keyframes shine {
-      0% { background-position: 0% }
-      100% { background-position: 200% }
+      text-shadow: 0 0 10px #fff, 0 0 20px #555;
     }
     .player {
       background: rgba(255, 255, 255, 0.05);
@@ -38,6 +76,7 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
       max-width: 600px;
       transition: all 0.3s ease-in-out;
+      position: relative;
     }
     .player:hover {
       transform: scale(1.03);
@@ -56,54 +95,74 @@
     audio {
       width: 90%;
     }
-    footer {
-      margin-top: 50px;
-      color: #888;
-      font-size: 0.9em;
-    }
     canvas#particles {
       position: fixed;
       top: 0;
       left: 0;
       z-index: -1;
     }
+    .visualizer {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: 10px;
+    }
+    .bar {
+      width: 4px;
+      height: 20px;
+      margin: 0 2px;
+      background: #0ff;
+      animation: bounce 1s infinite ease-in-out;
+    }
+    .bar:nth-child(2) { animation-delay: 0.1s; }
+    .bar:nth-child(3) { animation-delay: 0.2s; }
+    .bar:nth-child(4) { animation-delay: 0.3s; }
+    .bar:nth-child(5) { animation-delay: 0.4s; }
+    @keyframes bounce {
+      0%, 100% { height: 20px; }
+      50% { height: 40px; }
+    }
+    footer {
+      margin-top: 50px;
+      color: #888;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
+  <div id="loader"><span>Loading...</span></div>
+  <div id="intro">
+    <h2>🎵 Playlist Musik Dann</h2>
+    <p>Selamat datang dan selamat mendengarkan!</p>
+  </div>
   <canvas id="particles"></canvas>
-  <h1>Playlist Musik Dann</h1>  <div class="player">
-    <p>1. Nanti Kita Seperti Ini - Batas Senja</p>
-    <audio id="sound1" controls>
-      <source src="sound1.mp3" type="audio/mpeg">
-      Browser kamu tidak mendukung audio.
-    </audio>
-    <br>
-    Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="document.getElementById('sound1').volume = this.value">
-  </div>  <div class="player">
-    <p>2. Somebody Pleasure</p>
-    <audio id="sound2" controls>
-      <source src="sound2.mp3" type="audio/mpeg">
-    </audio>
-    <br>
-    Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="document.getElementById('sound2').volume = this.value">
-  </div>  <div class="player">
-    <p>3. Calon Mantu</p>
-    <audio id="sound3" controls>
-      <source src="sound3.mp3" type="audio/mpeg">
-    </audio>
-    <br>
-    Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="document.getElementById('sound3').volume = this.value">
-  </div>  <div class="player">
-    <p>4. 123456 - Budi Doremi</p>
-    <audio id="sound4" controls>
-      <source src="sound4.mp3" type="audio/mpeg">
-    </audio>
-    <br>
-    Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="document.getElementById('sound4').volume = this.value">
-  </div>  <footer>
+  <h1>Playlist Musik Dann</h1>  <!-- Player elements tetap di sini seperti sebelumnya -->  <audio id="welcomeSound">
+    <source src="https://www.fesliyanstudios.com/play-mp3/6676" type="audio/mpeg">
+  </audio>  <footer>
     &copy; 2025 Dann Music Player
   </footer>  <script>
-    // Animasi partikel abstrak
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.display = "none";
+      const intro = document.getElementById("intro");
+      intro.classList.add("show");
+
+      const welcomeAudio = document.getElementById("welcomeSound");
+      welcomeAudio.play();
+
+      setTimeout(() => {
+        intro.classList.remove("show");
+      }, 3000);
+    });
+
+    function pauseOthers(currentAudio) {
+      const audios = document.querySelectorAll('audio');
+      audios.forEach(audio => {
+        if (audio !== currentAudio) audio.pause();
+      });
+    }
+
     const canvas = document.getElementById("particles");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
