@@ -8,10 +8,10 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #000000, #1c1c1c);
+      background: #0e0e0e;
       color: #fff;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     #loader {
       position: fixed;
@@ -59,20 +59,22 @@
       box-shadow: 0 0 10px #fff;
     }
     h1 {
-      color: #222;
-      margin: 90px 0 30px;
-      font-size: 2.8em;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 0 0 10px #fff, 0 0 20px #555;
+      margin: 80px 0 10px;
+      font-size: 2.5em;
+      color: #eee;
+      text-shadow: 0 0 10px #aaa;
+    }
+    #nowPlaying {
+      margin-bottom: 30px;
+      font-size: 1.2em;
+      color: #0ff;
+      font-weight: bold;
     }
     .player {
       background: rgba(255, 255, 255, 0.05);
       margin: 25px auto;
       padding: 25px;
       border-radius: 15px;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
       max-width: 600px;
       transition: all 0.3s ease-in-out;
       position: relative;
@@ -85,48 +87,43 @@
       margin-bottom: 12px;
       font-weight: bold;
       font-size: 1.2em;
-      color: #eee;
     }
-    input[type=range] {
-      width: 80%;
-      margin-top: 10px;
-    }
-    audio {
-      width: 90%;
-    }
-    canvas#particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    .visualizer {
+    canvas#visualizer {
       width: 100%;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
+      height: 50px;
+      background: #111;
+      display: block;
       margin-top: 10px;
-    }
-    .bar {
-      width: 4px;
-      height: 20px;
-      margin: 0 2px;
-      background: #0ff;
-      animation: bounce 1s infinite ease-in-out;
-    }
-    .bar:nth-child(2) { animation-delay: 0.1s; }
-    .bar:nth-child(3) { animation-delay: 0.2s; }
-    .bar:nth-child(4) { animation-delay: 0.3s; }
-    .bar:nth-child(5) { animation-delay: 0.4s; }
-    @keyframes bounce {
-      0%, 100% { height: 20px; }
-      50% { height: 40px; }
     }
     footer {
-      margin-top: 50px;
-      color: #888;
+      margin: 40px 0;
       font-size: 0.9em;
+      color: #999;
+    }
+    form {
+      margin: 40px auto;
+      background: #111;
+      padding: 20px;
+      max-width: 500px;
+      border-radius: 12px;
+    }
+    form input, form textarea, form button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px auto;
+      display: block;
+      border: none;
+      border-radius: 8px;
+    }
+    form input, form textarea {
+      background: #222;
+      color: #fff;
+    }
+    form button {
+      background: #0ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -136,64 +133,100 @@
     <h2>🎵 Playlist Musik Dann</h2>
     <button onclick="mulaiWebsite()">Masuk</button>
   </div>
-  <canvas id="particles"></canvas>
-  <h1 style="display:none">Playlist Musik Dann</h1>  <!-- Player elements tetap di sini -->  <audio id="welcomeSound" preload="auto">
+  <h1 style="display:none">Playlist Musik Dann</h1>
+  <div id="nowPlaying"></div>  <div class="player">
+    <p>Nanti Kita Seperti Ini - Batas Senja</p>
+    <audio id="sound1" controls onplay="handlePlay(this, 'Nanti Kita Seperti Ini - Batas Senja')">
+      <source src="sound1.mp3" type="audio/mpeg">
+    </audio>
+    <canvas id="visualizer"></canvas>
+  </div>  <div class="player">
+    <p>Somebody Pleasure</p>
+    <audio id="sound2" controls onplay="handlePlay(this, 'Somebody Pleasure')">
+      <source src="sound2.mp3" type="audio/mpeg">
+    </audio>
+  </div>  <div class="player">
+    <p>Calon Mantu</p>
+    <audio id="sound3" controls onplay="handlePlay(this, 'Calon Mantu')">
+      <source src="sound3.mp3" type="audio/mpeg">
+    </audio>
+  </div>  <div class="player">
+    <p>123456 - Budi Doremi</p>
+    <audio id="sound4" controls onplay="handlePlay(this, '123456 - Budi Doremi')">
+      <source src="sound4.mp3" type="audio/mpeg">
+    </audio>
+  </div>  <form onsubmit="kirimRequest(); return false;">
+    <h3>Request Lagu Favoritmu 🎶</h3>
+    <input type="text" id="nama" placeholder="Namamu" required>
+    <textarea id="pesan" placeholder="Judul lagu atau pesan..." required></textarea>
+    <button type="submit">Kirim Request</button>
+  </form>  <footer style="display:none">&copy; 2025 Dann Music Player</footer>  <audio id="welcomeSound" preload="auto">
     <source src="https://www.fesliyanstudios.com/play-mp3/6676" type="audio/mpeg">
-  </audio>  <footer style="display:none">
-    &copy; 2025 Dann Music Player
-  </footer>  <script>
-    window.addEventListener("load", () => {
-      document.getElementById("loader").style.display = "none";
-      document.getElementById("welcomeScreen").style.display = "flex";
-    });
+  </audio>  <script>
+    const loader = document.getElementById("loader");
+    const welcome = document.getElementById("welcomeScreen");
+    const nowPlaying = document.getElementById("nowPlaying");
+    const audioVisualizer = document.getElementById("visualizer");
+    const ctx = audioVisualizer.getContext("2d");
+    audioVisualizer.height = 50;
+
+    window.onload = () => {
+      loader.style.display = "none";
+      welcome.style.display = "flex";
+    }
 
     function mulaiWebsite() {
-      document.getElementById("welcomeScreen").style.display = "none";
+      welcome.style.display = "none";
       document.querySelector("h1").style.display = "block";
       document.querySelector("footer").style.display = "block";
       document.getElementById("welcomeSound").play();
     }
 
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-    const colors = ["#ffffff", "#00ffff", "#999999"];
-
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        speedX: Math.random() * 0.6 - 0.3,
-        speedY: Math.random() * 0.6 - 0.3,
-        color: colors[Math.floor(Math.random() * colors.length)]
+    function pauseOthers(currentAudio) {
+      document.querySelectorAll("audio").forEach(audio => {
+        if (audio !== currentAudio) audio.pause();
       });
     }
 
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
-      }
-      requestAnimationFrame(animate);
+    function handlePlay(audio, title) {
+      pauseOthers(audio);
+      nowPlaying.textContent = "Now Playing: " + title;
+      runVisualizer(audio);
     }
 
-    animate();
-    window.addEventListener("resize", () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
+    function kirimRequest() {
+      const nama = document.getElementById("nama").value;
+      const pesan = document.getElementById("pesan").value;
+      const link = `https://wa.me/6289616331000?text=Request%20dari%20${encodeURIComponent(nama)}:%20${encodeURIComponent(pesan)}`;
+      window.open(link, '_blank');
+    }
+
+    function runVisualizer(audio) {
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      const src = context.createMediaElementSource(audio);
+      const analyser = context.createAnalyser();
+      src.connect(analyser);
+      analyser.connect(context.destination);
+
+      analyser.fftSize = 64;
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      function draw() {
+        ctx.clearRect(0, 0, audioVisualizer.width, audioVisualizer.height);
+        analyser.getByteFrequencyData(dataArray);
+
+        const barWidth = (audioVisualizer.width / bufferLength);
+        let x = 0;
+        for (let i = 0; i < bufferLength; i++) {
+          const barHeight = dataArray[i] / 2;
+          ctx.fillStyle = '#0ff';
+          ctx.fillRect(x, audioVisualizer.height - barHeight, barWidth - 2, barHeight);
+          x += barWidth;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
   </script></body>
 </html>
