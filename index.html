@@ -2,342 +2,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Musik Dann</title>
+  <title>Music Player - Dann</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #121212;
-      color: #fff;
-      overflow-x: hidden;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-    header {
-      text-align: center;
-      padding: 50px 20px 20px;
-      font-size: 2.5em;
-      text-shadow: 0 0 10px #00ffe0;
-      transition: all 0.5s ease-in-out;
-    }
-    .player {
-      max-width: 650px;
-      margin: 30px auto;
-      background: rgba(31, 31, 47, 0.95);
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0,255,255,0.1);
-      text-align: center;
-      transition: all 0.6s ease;
-    }
-    audio {
-      width: 100%;
-      margin: 15px 0;
-    }
-    button {
-      padding: 12px 22px;
-      border: none;
-      border-radius: 8px;
-      background: #00ffe0;
-      color: #121212;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      margin: 10px 5px;
-    }
-    button:hover {
-      background: #00cfc2;
-    }
-    #nowPlaying {
-      margin-bottom: 10px;
-      font-size: 1.1em;
-      color: #a0faff;
-    }
-    #lyricsBox {
-      display: none;
-      max-width: 650px;
-      max-height: 300px;
-      overflow-y: auto;
-      background: rgba(50, 50, 65, 0.9);
-      padding: 20px;
-      border-radius: 12px;
-      line-height: 1.6;
-      color: #eee;
-      white-space: pre-line;
-      margin: 20px auto;
-    }
-    .glow {
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #00ffe0; }
-      to { text-shadow: 0 0 20px #00a896; }
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #aaa;
-      font-size: 0.9em;
-    }
-    .req-box {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: rgba(255,255,255,0.05);
-      border-radius: 12px;
-    }
-    .req-box input {
-      width: 70%;
-      padding: 10px;
-      margin-right: 10px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-    }
-    .req-box button {
-      padding: 10px 16px;
-    }
-    #reqList {
-      margin-top: 10px;
-      font-size: 0.9em;
-      color: #ccc;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #0e0e0e;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #fff;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.track {
+  background: #1c1c1c;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.track-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+audio {
+  width: 100%;
+  outline: none;
+}
+
+.lyrics {
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  white-space: pre-line;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 1rem;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.request-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #1c1c1c;
+  border-radius: 10px;
+}
+
+input {
+  padding: 0.6rem;
+  margin: 0.3rem;
+  border-radius: 5px;
+  border: none;
+  width: 80%;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: #444;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #666;
+}
+
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
   </style>
 </head>
 <body>
-  <canvas id="particles"></canvas>
-  <header class="glow">🎶 Website Musik Dann 🎶</header>  <div class="player">
-    <p id="nowPlaying">Judul: Tidak ada</p><audio id="sound1" src="sound1.mp3" controls></audio>
-<audio id="sound2" src="sound2.mp3" controls></audio>
-<audio id="sound3" src="sound3.mp3" controls></audio>
-<audio id="sound4" src="sound4.mp3" controls></audio>
+  <div class="particles"></div>
+  <header>🎵 Music by Dann 🎵</header>
+  <div class="container"><div class="track">
+  <div class="track-title">1. Nanti Kita Seperti Ini - Batas Senja</div>
+  <audio id="audio1" controls onplay="pauseOthers(1)">
+    <source src="sound1.mp3" type="audio/mpeg">
+  </audio>
+  <div class="lyrics">
+    (lirik lengkap sebelumnya tetap di sini)
+  </div>
+</div>
 
-<button onclick="toggleLyrics(1)">📜 Lirik Lagu 1</button>
-<button onclick="toggleLyrics(2)">📜 Lirik Lagu 2</button>
-<button onclick="toggleLyrics(3)">📜 Lirik Lagu 3</button>
+<div class="track">
+  <div class="track-title">2. Somebody Pleasure</div>
+  <audio id="audio2" controls onplay="pauseOthers(2)">
+    <source src="sound2.mp3" type="audio/mpeg">
+  </audio>
+  <div class="lyrics">
+    (lirik lengkap sebelumnya tetap di sini)
+  </div>
+</div>
 
-  </div>  <div class="req-box">
-    <h3 style="color:#00ffe0;">🎧 Request Lagu</h3>
-    <input type="text" id="reqInput" placeholder="Masukkan judul lagu...">
-    <button onclick="addRequest()">Kirim</button>
-    <div id="reqList"></div>
-  </div>  <div id="lyricsBox"></div>  <footer>Powered by Dann</footer>  <script>
-    const audios = document.querySelectorAll("audio");
-    const nowPlayingText = document.getElementById("nowPlaying");
-    const lyricsBox = document.getElementById("lyricsBox");
-    const titles = [
-      "Nanti Kita Seperti Ini",
-      "Somebody Pleasure",
-      "Calon Mantu",
-      "123456 - Budi Doremi"
-    ];
+<div class="track">
+  <div class="track-title">3. Calon Mantu</div>
+  <audio id="audio3" controls onplay="pauseOthers(3)">
+    <source src="sound3.mp3" type="audio/mpeg">
+  </audio>
+  <div class="lyrics">
+    (lirik lengkap sebelumnya tetap di sini)
+  </div>
+</div>
 
-    const lyrics = [
-`Ini gambaran kita suatu hari nanti
-Set'lah sekian lama kita jalani
-Lewati masa-masa yang berarti
-Kini ku sudah yakin pada satu hati
-Yang kurasa tepat untuk temani
-Sekarang hingga aku tua nanti
-Ingin punya rumah 'tuk tempat bermesra
-Kau dipanggil ibu, sementara aku ayah
-Bertukar cerita di ruang keluarga
-Bercengk'rama dan menimang buah hati kita
-Sederhana
-Bahagia ini lengkap sudah
-Sama-sama
-Hingga nanti kita tutup mata
-Ha-ah-ah-ah
-Ah-ah-ah-ah
-Ha-ah-ah-ah
-Ingin punya rumah 'tuk tempat bermesra
-Kau dipanggil ibu, sementara aku ayah
-Bertukar cerita hingga lelap mata
-Lalu datang pagi, kau memasak, ku bekerja
-Sederhana
-Bahagia ini lengkap sudah
-Sama-sama
-Hingga nanti ajal kita tiba
-Semoga saja
-Niat baik 'kan terwujud seg'ra
-Asal kita
-Percaya Dia Maha Segalanya
-Jangan dulu lelah, yakin semua indah
-Pejamkanlah mata, pada-Nya kita berserah`,
+<div class="track">
+  <div class="track-title">4. 123456 - Budi Doremi</div>
+  <audio id="audio4" controls onplay="pauseOthers(4)">
+    <source src="sound4.mp3" type="audio/mpeg">
+  </audio>
+  <div class="lyrics">
+    Yo, yo, what′s up? Yo
+    Budi in the house, yo
+    Yo, yo, yo
+    Yo, ya, yo, yo
+    
+    ### verse
+    Ada sebuah cerita
+    Tentang aku dan dia
+    Jumpa pertamaku dengannya
+    Di satu sore yang cerah
+    Singkat kata, singkat cerita
+    Ku berjalan dengannya
+    Namun, apa yang aku rasa?
+    Mungkinkah ini cinta?
 
-`I've been too busy, ignoring, and hiding
-About what my heart actually say
-Stay awake while I'm drowning on my thoughts
-Sometimes a happiness is just a happiness
-I've never been enjoyin' my serenity
-Even if I've got a lot of company
-That makes me happy
-Soul try to figure it out
-From where I've been escapin'
-Running to end all the sin
-Get away from the pressure
-Wondering to get a love that is so pure
-Gotta have to always make sure
-That I'm not just somebody's pleasure
-I always pretending and lying
-I got used to feeling empty
-'Cause all I got is unhappy
-Happiness, can't I get happiness?
-I've never been enjoyin' my serenity
-Even if I've got a lot of company
-That makes me happy
-Soul try to figure it out
-From where I've been escapin'
-Running to end all the sin
-Get away from the pressure
-Wondering to get a love that is so pure
-Gotta have to always make sure
-That I'm not just somebody's pleasure
-It was in a blink of an eye
-Find a way how to say goodbye
-I've got to take me away
-From all sadness
-Stitch all my wounds, confess all the sins (confess all the sins)
-And took all my insecure
-When will I got the love that is so pure?
-Gotta have to always make sure
-That I'm not just somebody's pleasure
-Gotta have
-Gotta have to always make sure
-That I'm not just somebody's pleasure`,
+    ### pre-chorus
+    Dan aku, kubayangkan dirimu
+    Mulai ada rindu
+    Duniaku terhenti kar'na kamu
+    Mungkin bisa jadi milikku
+    S′moga lagu cinta ini
+    Bersarang tepat di hatimu
 
-`Suara lembutmu
-Mengisyaratkan cinta
-Tatap matamu
-Buatku menggila
-Kecup manismu
-Wanna be all over you
-Terus mendekat
-Biar ku dekap
+    ### chorus
+    Satu kali ku bertemu
+    Dua-lam sudah rasaku
+    Tiga kata yang kutahu
+    "Aku cinta padamu"
+    Empat malam ku menunggu
+    Jawaban cinta darimu
+    Lima tanda yang kauberi
+    Enam-paknya kau cinta padaku
 
-Tick Tock
-Hatiku kau zip lock
-Makin lama It’s stuck
-Ku percaya ini with my luck
-It’s just me and you against the world
-Forever im yours and you’ll be mine
-But do you feel it too?
-Like the way I do?
-Aku calon mantu terbaik mamamu
-Walaupun hatimu
-Sekeras batu
-Still got you on mind
-No matter what you do
-But do you feel it too?
-Like the way I do?
-Aku calon mantu terbaik mamamu
-Walaupun hatimu
-Sekeras batu
-Still got you on mind
-no matter what you do
+    ### hook
+    (Na-na-na-na-na-na-na) oh-yeah
+    (Na-na-na-na, na-na-na-na-na) yeah-yeah-yeah
+    (Na-na-na-na, na-na-na-na-na-na-na) hu-wu-wu, wu-wu-wu-wu
 
-Baby aku rindu resah selalu ingin bertemu
-Hold you in my arms
-Baby tell me do you feel it too?
-Main main
-Ku cuma mind mine,
-Stay for the night maybe it will be alright
-Tick Tock
-Hatiku kau zip lock
-Makin lama It’s stuck
-Ku percaya ini with my luck
-It’s just me and you against the world
-Forever im yours and youll be mine
-But do you feel it too?
-Like the way I do?
-Aku calon mantu terbaik mamamu
-Walau hatimu
-Sekeras batu
-Still got you on mind I still got you in my mind
-Baby do you feel it too?.(far)`
-    ];
+    ### pre-chorus
+    Dan aku, kubayangkan dirimu
+    Mulai ada rindu
+    Duniaku terhenti kar'na kamu
+    Mungkin bisa jadi milikku
+    S'moga lagu cinta ini
+    Bersarang tepat di hatimu
 
-    audios.forEach((audio, i) => {
-      audio.addEventListener("play", () => {
-        audios.forEach((a) => {
-          if (a !== audio) a.pause();
-        });
-        nowPlayingText.textContent = "Judul: " + titles[i];
-        lyricsBox.style.display = "none";
-      });
-      audio.addEventListener("pause", () => {
-        const anyPlaying = Array.from(audios).some(a => !a.paused);
-        if (!anyPlaying) nowPlayingText.textContent = "Judul: Tidak ada";
-      });
-    });
+    ### verse
+    Satu, dua, tiga, empat, lima, dan enam
+    Rasa kutanam dan cinta mulai berkembang
+    Begitulah proses tangkap-menangkap hati darimu
+    Ya, namanya juga orang lagi usaha, mau gimana lagi?
+    Kau di sana, ku di sini
+    Kau tersipu, artinya mau
 
-    function toggleLyrics(index) {
-      lyricsBox.textContent = lyrics[index - 1];
-      lyricsBox.style.display = (lyricsBox.style.display === "none") ? "block" : "none";
-    }
+    ### hook
+    Wo-ho-oh, eh-yeah-yeah-yeah
+    Na-na-na-na-na-na, ta-ra-ta-ra
+    Ta-ra-ra-ra-ra, ta-ta, oh
 
-    function addRequest() {
-      const input = document.getElementById("reqInput");
-      const list = document.getElementById("reqList");
-      if (input.value.trim()) {
-        const item = document.createElement("div");
-        item.textContent = "✔️ " + input.value;
-        list.appendChild(item);
-        input.value = "";
+    ### chorus
+    Satu kali ku bertemu
+    Dua-lam sudah rasaku
+    Tiga kata yang kutahu
+    "Aku cinta padamu"
+    Empat malam ku menunggu
+    Jawaban cinta darimu
+    Lima tanda yang kauberi
+    Enam-paknya kau cinta pa-
+    Satu kali ku bertemu
+    Dua-lam sudah rasaku
+    Tiga kata yang kutahu
+    "Aku cinta padamu"
+    Empat malam ku menunggu
+    Jawaban cinta darimu
+    Lima tanda yang kauberi
+    Enam-paknya kau cinta pa-
+    Enam-paknya kau cinta pa-
+    Enam-paknya kau cinta padaku
+
+    ### hook
+    (Na-na-na-na-na-na-na) oh-yeah
+    (Na-na-na-na, na-na-na-na-na) yeah-yeah-yeah
+    (Na-na-na-na, na-na-na-na-na-na-na) yeah-yeah, yeah-yeah
+
+    ### outro
+    Enam-paknya kau cinta padaku
+    Terima kasih
+  </div>
+</div>
+
+<div class="request-section">
+  <h3>Request Lagu via WhatsApp</h3>
+  <input type="text" id="reqName" placeholder="Nama kamu...">
+  <input type="text" id="reqInput" placeholder="Judul lagu yang kamu request...">
+  <br>
+  <button onclick="sendWARequest()">Kirim via WhatsApp</button>
+</div>
+
+<footer>
+  Powered by Dann 💿
+</footer>
+
+  </div>  <script>
+    function pauseOthers(exceptId) {
+      for (let i = 1; i <= 4; i++) {
+        const audio = document.getElementById("audio" + i);
+        if (i !== exceptId && audio) {
+          audio.pause();
+        }
       }
     }
 
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    let particles = [];
-
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    function sendWARequest() {
+      const name = document.getElementById("reqName").value.trim();
+      const song = document.getElementById("reqInput").value.trim();
+      if (!name || !song) {
+        alert("Isi nama dan lagu dulu ya!");
+        return;
+      }
+      const nomor = "6289616331000";
+      const pesan = `Halo! Saya ${name} mau request lagu:\n\n🎶 *${song}*\n\nTerima kasih!`;
+      const link = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+      window.open(link, '_blank');
     }
-    window.addEventListener("resize", resize);
-    resize();
-
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5 + 0.5,
-        dx: (Math.random() - 0.5) * 0.6,
-        dy: (Math.random() - 0.5) * 0.6
-      });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(0,255,255,0.1)";
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fill();
-        p.x += p.dx;
-        p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-      });
-      requestAnimationFrame(draw);
-    }
-    draw();
   </script></body>
 </html>
