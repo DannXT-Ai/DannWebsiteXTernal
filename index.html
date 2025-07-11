@@ -7,27 +7,45 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #1f1c2c, #928dab);
-      color: #f0f0f0;
+      background-color: #000;
+      color: #fff;
       text-align: center;
       padding: 40px 20px;
+      overflow: hidden;
     }
     h1 {
-      color: #00bcd4;
+      color: #fff;
       margin-bottom: 30px;
+      font-size: 2.5em;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #555;
+      display: inline-block;
+      padding-bottom: 10px;
+      animation: glowText 4s ease-in-out infinite;
+    }
+    @keyframes glowText {
+      0% { text-shadow: 0 0 10px #fff; }
+      50% { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
+      100% { text-shadow: 0 0 10px #fff; }
     }
     .player {
-      background: #2c2f33;
-      margin: 20px auto;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-      max-width: 500px;
+      background: #111;
+      margin: 25px auto;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      max-width: 600px;
+      transition: transform 0.3s;
+    }
+    .player:hover {
+      transform: translateY(-5px);
     }
     .player p {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-weight: bold;
-      color: #ffffff;
+      font-size: 1.2em;
+      color: #ddd;
     }
     input[type=range] {
       width: 80%;
@@ -38,13 +56,20 @@
     }
     footer {
       margin-top: 50px;
-      color: #aaa;
+      color: #666;
       font-size: 0.9em;
+    }
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
-  <h1>🎧 Playlist Musik Dann</h1>  <div class="player">
+  <canvas id="particles"></canvas>
+  <h1>Playlist Musik Dann</h1>  <div class="player">
     <p>1. Nanti Kita Seperti Ini - Batas Senja</p>
     <audio id="sound1" controls>
       <source src="sound1.mp3" type="audio/mpeg">
@@ -75,6 +100,48 @@
     Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="document.getElementById('sound4').volume = this.value">
   </div>  <footer>
     &copy; 2025 Dann Music Player
-  </footer>
-</body>
+  </footer>  <script>
+    // Animasi partikel abstrak
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const colors = ["#ffffff", "#aaaaaa", "#dddddd"];
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speedX: Math.random() * 0.6 - 0.3,
+        speedY: Math.random() * 0.6 - 0.3,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script></body>
 </html>
