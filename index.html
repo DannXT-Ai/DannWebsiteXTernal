@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pemutar Musik Dann</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to right, #f9e0e0, #ffe6f0);
+      text-align: center;
+      padding: 50px;
+      color: #333;
+      overflow: hidden;
+    }
+    h1 {
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+    .player {
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 15px rgba(255, 77, 166, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(255, 77, 166, 0.6); }
+      100% { box-shadow: 0 0 15px rgba(255, 77, 166, 0.3); }
+    }
+    .player button {
+      background: #ff4da6;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      margin: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .player button:hover {
+      background: #e60073;
+    }
+    input[type=range] {
+      width: 80%;
+      margin-top: 10px;
+    }
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: url('https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif') repeat;
+      background-size: cover;
+      opacity: 0.05;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="particles"></div>
+  <h1>🎵 Playlist Dann 🎵</h1>  <div class="player">
+    <p>sound1: Nanti Kita Seperti Ini - Batas Senja</p>
+    <audio id="sound1" controls>
+      <source src="https://audio.jukehost.co.uk/yrDJIDznHTaAd3VQ1zRHVluTE2UMUSFi" type="audio/mpeg">
+      Browser kamu tidak mendukung audio.
+    </audio>
+    <br>
+    Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" onchange="document.getElementById('sound1').volume = this.value">
+  </div>  <div class="player">
+    <p>sound2: Somebody Pleasure</p>
+    <audio id="sound2" controls>
+      <source src="https://audio.jukehost.co.uk/I7rVRyblK8nAjboFvhkVhNVIEKTRaWKa" type="audio/mpeg">
+    </audio>
+    <br>
+    Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" onchange="document.getElementById('sound2').volume = this.value">
+  </div>  <div class="player">
+    <p>sound3: Calon Mantu</p>
+    <audio id="sound3" controls>
+      <source src="https://audio.jukehost.co.uk/UXjPbIzQDYBlhCRjORZIXNHRNRcRE4h6" type="audio/mpeg">
+    </audio>
+    <br>
+    Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" onchange="document.getElementById('sound3').volume = this.value">
+  </div>  <div class="player">
+    <p>sound4: 123456 - Budi Doremi</p>
+    <audio id="sound4" controls>
+      <source src="https://audio.jukehost.co.uk/1m1G6Fg1Er3CtRtwcrp6pMuEXWZJpb06" type="audio/mpeg">
+    </audio>
+    <br>
+    Volume: <input type="range" min="0" max="1" step="0.01" value="0.5" onchange="document.getElementById('sound4').volume = this.value">
+  </div></body>
+</html>
