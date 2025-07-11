@@ -32,7 +32,7 @@
       0%, 100% { opacity: 0; }
       50% { opacity: 1; }
     }
-    #intro {
+    #welcomeScreen {
       position: fixed;
       width: 100%;
       height: 100%;
@@ -42,22 +42,21 @@
       align-items: center;
       flex-direction: column;
       z-index: 99;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 1s ease;
     }
-    #intro.show {
-      opacity: 1;
-      visibility: visible;
-    }
-    #intro h2 {
+    #welcomeScreen h2 {
       color: #fff;
-      font-size: 2.5em;
-      margin-bottom: 10px;
+      font-size: 2em;
+      margin-bottom: 15px;
     }
-    #intro p {
-      color: #aaa;
+    #welcomeScreen button {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
       font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
     }
     h1 {
       color: #222;
@@ -133,34 +132,26 @@
 </head>
 <body>
   <div id="loader"><span>Loading...</span></div>
-  <div id="intro">
+  <div id="welcomeScreen" style="display:none">
     <h2>🎵 Playlist Musik Dann</h2>
-    <p>Selamat datang dan selamat mendengarkan!</p>
+    <button onclick="mulaiWebsite()">Masuk</button>
   </div>
   <canvas id="particles"></canvas>
-  <h1>Playlist Musik Dann</h1>  <!-- Player elements tetap di sini seperti sebelumnya -->  <audio id="welcomeSound">
+  <h1 style="display:none">Playlist Musik Dann</h1>  <!-- Player elements tetap di sini -->  <audio id="welcomeSound" preload="auto">
     <source src="https://www.fesliyanstudios.com/play-mp3/6676" type="audio/mpeg">
-  </audio>  <footer>
+  </audio>  <footer style="display:none">
     &copy; 2025 Dann Music Player
   </footer>  <script>
     window.addEventListener("load", () => {
       document.getElementById("loader").style.display = "none";
-      const intro = document.getElementById("intro");
-      intro.classList.add("show");
-
-      const welcomeAudio = document.getElementById("welcomeSound");
-      welcomeAudio.play();
-
-      setTimeout(() => {
-        intro.classList.remove("show");
-      }, 3000);
+      document.getElementById("welcomeScreen").style.display = "flex";
     });
 
-    function pauseOthers(currentAudio) {
-      const audios = document.querySelectorAll('audio');
-      audios.forEach(audio => {
-        if (audio !== currentAudio) audio.pause();
-      });
+    function mulaiWebsite() {
+      document.getElementById("welcomeScreen").style.display = "none";
+      document.querySelector("h1").style.display = "block";
+      document.querySelector("footer").style.display = "block";
+      document.getElementById("welcomeSound").play();
     }
 
     const canvas = document.getElementById("particles");
