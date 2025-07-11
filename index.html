@@ -12,7 +12,7 @@
     }
     body {
       font-family: 'Poppins', sans-serif;
-      background: #1e1e2f;
+      background: #121212;
       color: #fff;
       overflow-x: hidden;
       animation: fadeIn 1.5s ease-in-out;
@@ -33,16 +33,16 @@
       text-align: center;
       padding: 50px 20px 20px;
       font-size: 2.5em;
-      text-shadow: 0 0 10px #ff69b4;
+      text-shadow: 0 0 10px #00ffe0;
       transition: all 0.5s ease-in-out;
     }
     .player {
       max-width: 650px;
       margin: 30px auto;
-      background: rgba(41, 41, 66, 0.8);
+      background: rgba(31, 31, 47, 0.95);
       padding: 25px;
       border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255,105,180,0.2);
+      box-shadow: 0 0 20px rgba(0,255,255,0.1);
       text-align: center;
       transition: all 0.6s ease;
     }
@@ -54,44 +54,67 @@
       padding: 12px 22px;
       border: none;
       border-radius: 8px;
-      background: #ff69b4;
-      color: #fff;
+      background: #00ffe0;
+      color: #121212;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
       margin: 10px 5px;
     }
     button:hover {
-      background: #ff85c1;
+      background: #00cfc2;
     }
     #nowPlaying {
       margin-bottom: 10px;
       font-size: 1.1em;
-      color: #ffd1dc;
+      color: #a0faff;
     }
     #lyricsBox {
       display: none;
       max-width: 650px;
       margin: 20px auto;
-      background: rgba(31, 31, 47, 0.9);
+      background: rgba(50, 50, 65, 0.9);
       padding: 20px;
       border-radius: 12px;
       line-height: 1.6;
-      color: #ddd;
+      color: #eee;
       white-space: pre-line;
     }
     .glow {
       animation: glow 2s ease-in-out infinite alternate;
     }
     @keyframes glow {
-      from { text-shadow: 0 0 5px #ff69b4; }
-      to { text-shadow: 0 0 20px #ff1493; }
+      from { text-shadow: 0 0 5px #00ffe0; }
+      to { text-shadow: 0 0 20px #00a896; }
     }
     footer {
       text-align: center;
       padding: 20px;
       color: #aaa;
       font-size: 0.9em;
+    }
+    .req-box {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: rgba(255,255,255,0.05);
+      border-radius: 12px;
+    }
+    .req-box input {
+      width: 70%;
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+    .req-box button {
+      padding: 10px 16px;
+    }
+    #reqList {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #ccc;
     }
   </style>
 </head>
@@ -103,48 +126,28 @@
 <audio id="sound3" src="sound3.mp3" controls></audio>
 <audio id="sound4" src="sound4.mp3" controls></audio>
 
-<button onclick="toggleLyrics()">📜 Lirik Lagu 1</button>
+<button onclick="toggleLyrics(1)">📜 Lirik Lagu 1</button>
+<button onclick="toggleLyrics(2)">📜 Lirik Lagu 2</button>
 
-  </div>  <div id="lyricsBox">
-Ini gambaran kita suatu hari nanti  
-Set'lah sekian lama kita jalani  
-Lewati masa-masa yang berarti  
-Kini ku sudah yakin pada satu hati  
-Yang kurasa tepat untuk temani  
-Sekarang hingga aku tua nanti  
-Ingin punya rumah 'tuk tempat bermesra  
-Kau dipanggil ibu, sementara aku ayah  
-Bertukar cerita di ruang keluarga  
-Bercengk'rama dan menimang buah hati kita  
-Sederhana  
-Bahagia ini lengkap sudah  
-Sama-sama  
-Hingga nanti kita tutup mata  
-Ha-ah-ah-ah  
-Ah-ah-ah-ah  
-Ha-ah-ah-ah  
-Ingin punya rumah 'tuk tempat bermesra  
-Kau dipanggil ibu, sementara aku ayah  
-Bertukar cerita hingga lelap mata  
-Lalu datang pagi, kau memasak, ku bekerja  
-Sederhana  
-Bahagia ini lengkap sudah  
-Sama-sama  
-Hingga nanti ajal kita tiba  
-Semoga saja  
-Niat baik 'kan terwujud seg'ra  
-Asal kita  
-Percaya Dia Maha Segalanya  
-Jangan dulu lelah, yakin semua indah  
-Pejamkanlah mata, pada-Nya kita berserah
-  </div>  <footer>Powered by Dann</footer>  <script>
+  </div>  <div class="req-box">
+    <h3 style="color:#00ffe0;">🎧 Request Lagu</h3>
+    <input type="text" id="reqInput" placeholder="Masukkan judul lagu...">
+    <button onclick="addRequest()">Kirim</button>
+    <div id="reqList"></div>
+  </div>  <div id="lyricsBox"></div>  <footer>Powered by Dann</footer>  <script>
     const audios = document.querySelectorAll("audio");
     const nowPlayingText = document.getElementById("nowPlaying");
+    const lyricsBox = document.getElementById("lyricsBox");
     const titles = [
       "Nanti Kita Seperti Ini",
       "Somebody Pleasure",
       "Calon Mantu",
       "123456 - Budi Doremi"
+    ];
+
+    const lyrics = [
+      `Ini gambaran kita suatu hari nanti\nSet'lah sekian lama kita jalani...`,
+      `I've been too busy, ignoring, and hiding\nAbout what my heart actually say...`
     ];
 
     audios.forEach((audio, i) => {
@@ -153,8 +156,7 @@ Pejamkanlah mata, pada-Nya kita berserah
           if (a !== audio) a.pause();
         });
         nowPlayingText.textContent = "Judul: " + titles[i];
-        if (i === 0) document.getElementById("lyricsBox").style.display = "block";
-        else document.getElementById("lyricsBox").style.display = "none";
+        lyricsBox.style.display = "none";
       });
       audio.addEventListener("pause", () => {
         const anyPlaying = Array.from(audios).some(a => !a.paused);
@@ -162,12 +164,22 @@ Pejamkanlah mata, pada-Nya kita berserah
       });
     });
 
-    function toggleLyrics() {
-      const lyrics = document.getElementById("lyricsBox");
-      lyrics.style.display = (lyrics.style.display === "none") ? "block" : "none";
+    function toggleLyrics(index) {
+      lyricsBox.textContent = lyrics[index - 1];
+      lyricsBox.style.display = (lyricsBox.style.display === "none") ? "block" : "none";
     }
 
-    // Simple Particles
+    function addRequest() {
+      const input = document.getElementById("reqInput");
+      const list = document.getElementById("reqList");
+      if (input.value.trim()) {
+        const item = document.createElement("div");
+        item.textContent = "✔️ " + input.value;
+        list.appendChild(item);
+        input.value = "";
+      }
+    }
+
     const canvas = document.getElementById("particles");
     const ctx = canvas.getContext("2d");
     let particles = [];
@@ -179,26 +191,25 @@ Pejamkanlah mata, pada-Nya kita berserah
     window.addEventListener("resize", resize);
     resize();
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 80; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5 + 1,
-        dx: (Math.random() - 0.5) * 0.5,
-        dy: (Math.random() - 0.5) * 0.5
+        radius: Math.random() * 1.5 + 0.5,
+        dx: (Math.random() - 0.5) * 0.6,
+        dy: (Math.random() - 0.5) * 0.6
       });
     }
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(255,255,255,0.2)";
+      ctx.fillStyle = "rgba(0,255,255,0.1)";
       particles.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
         p.x += p.dx;
         p.y += p.dy;
-
         if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
       });
