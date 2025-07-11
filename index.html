@@ -2,109 +2,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Musik Elegant</title>
+  <title>Website Musik Dann</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
-    * { box-sizing: border-box; }
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    * {
       margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #0f0f0f;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1e1e2f;
       color: #fff;
       overflow-x: hidden;
+      animation: fadeIn 1.5s ease-in-out;
     }
-    header {
-      text-align: center;
-      padding: 60px 20px 20px;
-      font-size: 2.2em;
-      color: #eee;
-      text-shadow: 0 0 10px #888;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    .player {
-      max-width: 600px;
-      margin: 30px auto;
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
-      text-align: center;
-    }
-    audio {
-      width: 100%;
-      margin: 10px 0;
-    }
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #fff;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 10px;
-    }
-    button:hover {
-      background: #ddd;
-    }
-    .visualizer {
-      width: 100%;
-      height: 60px;
-      background: #222;
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-    .bar {
-      flex: 1;
-      height: 20%;
-      background: #fff;
-      animation: pulse 1s infinite ease-in-out;
-    }
-    @keyframes pulse {
-      0%, 100% { height: 20%; }
-      50% { height: 80%; }
-    }
-    #lyricsBox {
-      display: none;
-      max-width: 600px;
-      margin: 20px auto;
-      background: #121212;
-      padding: 20px;
-      border-radius: 12px;
-      line-height: 1.6;
-      color: #ccc;
-      white-space: pre-line;
-      font-size: 0.95em;
-      box-shadow: 0 0 15px rgba(255,255,255,0.05);
-    }
-    #particles {
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: url('https://i.gifer.com/7plN.gif') repeat;
-      opacity: 0.05;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      font-size: 2.5em;
+      text-shadow: 0 0 10px #ff69b4;
+      transition: all 0.5s ease-in-out;
+    }
+    .player {
+      max-width: 650px;
+      margin: 30px auto;
+      background: rgba(41, 41, 66, 0.8);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,105,180,0.2);
+      text-align: center;
+      transition: all 0.6s ease;
+    }
+    audio {
+      width: 100%;
+      margin: 15px 0;
+    }
+    button {
+      padding: 12px 22px;
+      border: none;
+      border-radius: 8px;
+      background: #ff69b4;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 10px 5px;
+    }
+    button:hover {
+      background: #ff85c1;
+    }
+    #nowPlaying {
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      color: #ffd1dc;
+    }
+    #lyricsBox {
+      display: none;
+      max-width: 650px;
+      margin: 20px auto;
+      background: rgba(31, 31, 47, 0.9);
+      padding: 20px;
+      border-radius: 12px;
+      line-height: 1.6;
+      color: #ddd;
+      white-space: pre-line;
+    }
+    .glow {
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff69b4; }
+      to { text-shadow: 0 0 20px #ff1493; }
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
-  <div id="particles"></div>
-  <header>🎵 Website Musik Dann — Hitam Putih Elegan</header>  <div class="player">
-    <div class="visualizer">
-      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-    </div>
-    <p id="nowPlaying">Now Playing: Tidak ada</p><audio id="sound1" src="sound1.mp3" controls onplay="setNowPlaying('Nanti Kita Seperti Ini')" onpause="clearNowPlaying()"></audio>
-<audio id="sound2" src="sound2.mp3" controls onplay="setNowPlaying('Somebody Pleasure')" onpause="clearNowPlaying()"></audio>
-<audio id="sound3" src="sound3.mp3" controls onplay="setNowPlaying('Calon Mantu')" onpause="clearNowPlaying()"></audio>
-<audio id="sound4" src="sound4.mp3" controls onplay="setNowPlaying('123456 - Budi Doremi')" onpause="clearNowPlaying()"></audio>
+  <canvas id="particles"></canvas>
+  <header class="glow">🎶 Website Musik Dann 🎶</header>  <div class="player">
+    <p id="nowPlaying">Judul: Tidak ada</p><audio id="sound1" src="sound1.mp3" controls></audio>
+<audio id="sound2" src="sound2.mp3" controls></audio>
+<audio id="sound3" src="sound3.mp3" controls></audio>
+<audio id="sound4" src="sound4.mp3" controls></audio>
 
-<button onclick="toggleLyrics()">Tampilkan Lirik Lagu Pertama</button>
+<button onclick="toggleLyrics()">📜 Lirik Lagu 1</button>
 
   </div>  <div id="lyricsBox">
 Ini gambaran kita suatu hari nanti  
@@ -138,38 +137,73 @@ Asal kita
 Percaya Dia Maha Segalanya  
 Jangan dulu lelah, yakin semua indah  
 Pejamkanlah mata, pada-Nya kita berserah
-  </div>  <script>
+  </div>  <footer>Powered by Dann</footer>  <script>
     const audios = document.querySelectorAll("audio");
+    const nowPlayingText = document.getElementById("nowPlaying");
+    const titles = [
+      "Nanti Kita Seperti Ini",
+      "Somebody Pleasure",
+      "Calon Mantu",
+      "123456 - Budi Doremi"
+    ];
 
-    audios.forEach(audio => {
+    audios.forEach((audio, i) => {
       audio.addEventListener("play", () => {
-        audios.forEach(a => {
+        audios.forEach((a) => {
           if (a !== audio) a.pause();
         });
+        nowPlayingText.textContent = "Judul: " + titles[i];
+        if (i === 0) document.getElementById("lyricsBox").style.display = "block";
+        else document.getElementById("lyricsBox").style.display = "none";
+      });
+      audio.addEventListener("pause", () => {
+        const anyPlaying = Array.from(audios).some(a => !a.paused);
+        if (!anyPlaying) nowPlayingText.textContent = "Judul: Tidak ada";
       });
     });
 
-    function setNowPlaying(title) {
-      document.getElementById("nowPlaying").textContent = "Now Playing: " + title;
-      if (title === 'Nanti Kita Seperti Ini') {
-        document.getElementById("lyricsBox").style.display = "block";
-      } else {
-        document.getElementById("lyricsBox").style.display = "none";
-      }
-    }
-
-    function clearNowPlaying() {
-      document.getElementById("nowPlaying").textContent = "Now Playing: Tidak ada";
-      document.getElementById("lyricsBox").style.display = "none";
-    }
-
     function toggleLyrics() {
       const lyrics = document.getElementById("lyricsBox");
-      if (lyrics.style.display === "none") {
-        lyrics.style.display = "block";
-      } else {
-        lyrics.style.display = "none";
-      }
+      lyrics.style.display = (lyrics.style.display === "none") ? "block" : "none";
     }
+
+    // Simple Particles
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(255,255,255,0.2)";
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
   </script></body>
 </html>
